@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <strings.h>
 #include <string.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #include "sway/config.h"
 #include "sway/container.h"
 #include "sway/workspace.h"
@@ -82,6 +84,9 @@ static void free_swayc(swayc_t *cont) {
 	if (cont->border) {
 		if (cont->border->buffer) {
 			free(cont->border->buffer);
+		}
+		if (cont->border->tex_id) {
+			glDeleteTextures(1, &cont->border->tex_id);
 		}
 		free(cont->border);
 	}

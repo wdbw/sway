@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <arpa/inet.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #include "sway/border.h"
 #include "sway/container.h"
 #include "sway/config.h"
@@ -428,6 +430,24 @@ static void update_view_border(swayc_t *view) {
 			}
 
 			break;
+		}
+	}
+
+	if (view->border->buffer) {
+		GLenum err;
+		if (!view->border->tex_id) {
+			glGenTextures(1, &view->border->tex_id);
+			if ((err = glGetError()) != GL_NO_ERROR) {
+				sway_log(L_INFO, "Error allocating border texture: %u", err);
+				goto cleanup;
+			}
+		}
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,
+				view->border->geometry.size.w,
+				view->border->geometry.size.h,
+				0, GL_RGBA, GL_UNSIGNED_BYTE, view->border->buffer);
+		if ((err = glGetError()) != GL_NO_ERROR) {
+			sway_log(L_INFO, "Error allocating border texture: %u", err);
 		}
 	}
 

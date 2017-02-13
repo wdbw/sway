@@ -8,6 +8,7 @@ include_directories(
 	${CAIRO_INCLUDE_DIRS}
 	${PANGO_INCLUDE_DIRS}
 	${WAYLAND_INCLUDE_DIR}
+    ${GLESv2_INCLUDE_DIRS}
 )
 
 file(GLOB cmds
@@ -54,6 +55,7 @@ target_link_libraries(sway
 	${LIBINPUT_LIBRARIES}
 	${PANGO_LIBRARIES}
 	${JSONC_LIBRARIES}
+    ${GLESv2_LIBRARIES}
 	m
 )
 

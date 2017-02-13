@@ -62,6 +62,7 @@ find_package(Cairo REQUIRED)
 find_package(Pango REQUIRED)
 find_package(GdkPixbuf)
 find_package(PAM)
+find_package(GLES2 REQUIRED)
 
 find_package(LibInput REQUIRED)
 

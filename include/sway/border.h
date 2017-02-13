@@ -1,12 +1,15 @@
 #ifndef _SWAY_BORDER_H
 #define _SWAY_BORDER_H
 #include <wlc/wlc.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #include "container.h"
 
 /**
  * Border pixel buffer and corresponding geometry.
  */
 struct border {
+	GLuint tex_id;
 	unsigned char *buffer;
 	struct wlc_geometry geometry;
 };
